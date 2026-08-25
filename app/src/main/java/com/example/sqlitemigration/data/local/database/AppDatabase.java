@@ -17,27 +17,49 @@ public final class AppDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create table here
-         db.execSQL("CREATE TABLE \"users\" (\n" +
-                 "  \"id\" SERIAL PRIMARY KEY,\n" +
-                 "  \"name\" VARCHAR(255),\n" +
-                 "  \"username\" VARCHAR(255),\n" +
-                 "  \"email\" VARCHAR(255),\n" +
-                 "  \"address\" JSONB,\n" +
-                 "  \"phone\" VARCHAR(255),\n" +
-                 "  \"website\" VARCHAR(255),\n" +
-                 "  \"company\" JSONB\n" +
-                 ");");
+        db.execSQL(
+                "CREATE TABLE users (" +
+                        "id INTEGER PRIMARY KEY, " +
+                        "name TEXT, " +
+                        "username TEXT, " +
+                        "email TEXT, " +
+                        "phone TEXT, " +
+                        "website TEXT" +
+                        ")"
+        );
 
-        db.execSQL("CREATE TABLE \"posts\" (\n" +
-                "  \"userId\" INTEGER,\n" +
-                "  \"id\" INTEGER PRIMARY KEY,\n" +
-                "  \"title\" TEXT,\n" +
-                "  \"body\" TEXT\n" +
-                ");");
+        db.execSQL(
+                "CREATE TABLE user_addresses (" +
+                        "user_id INTEGER PRIMARY KEY, " +
+                        "street TEXT, " +
+                        "suite TEXT, " +
+                        "city TEXT, " +
+                        "zipcode TEXT, " +
+                        "latitude TEXT, " +
+                        "longitude TEXT, " +
+                        "FOREIGN KEY(user_id) REFERENCES users(id)" +
+                        ")"
+        );
 
-        // Trigger onUpgrade for V1 -> V2 baseline if starting fresh at V2
-        onUpgrade(db, 1, Constants.DATABASE_VERSION);
+        db.execSQL(
+                "CREATE TABLE user_companies (" +
+                        "user_id INTEGER PRIMARY KEY, " +
+                        "name TEXT, " +
+                        "catch_phrase TEXT, " +
+                        "bs TEXT, " +
+                        "FOREIGN KEY(user_id) REFERENCES users(id)" +
+                        ")"
+        );
+
+        db.execSQL(
+                "CREATE TABLE posts (" +
+                        "id INTEGER PRIMARY KEY, " +
+                        "user_id INTEGER NOT NULL, " +
+                        "title TEXT, " +
+                        "body TEXT, " +
+                        "FOREIGN KEY(user_id) REFERENCES users(id)" +
+                        ")"
+        );
     }
 
     @Override

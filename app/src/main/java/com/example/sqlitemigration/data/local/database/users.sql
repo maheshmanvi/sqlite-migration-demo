@@ -1,12 +1,12 @@
 CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(255),
-  "username" VARCHAR(255),
-  "email" VARCHAR(255),
-  "address" JSONB,
-  "phone" VARCHAR(255),
-  "website" VARCHAR(255),
-  "company" JSONB
+  "id" INTEGER PRIMARY KEY,
+  "name" TEXT,
+  "username" TEXT,
+  "email" TEXT,
+  "address" TEXT,
+  "phone" TEXT,
+  "website" TEXT,
+  "company" TEXT
 );
 
 INSERT INTO "users" ("id", "name", "username", "email", "address", "phone", "website", "company")
