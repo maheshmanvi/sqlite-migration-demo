@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SQLite Migration</string>
+    <string name="welcome">WELCOME</string>
 </resources>

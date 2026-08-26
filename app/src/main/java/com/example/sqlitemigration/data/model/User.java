@@ -1,5 +1,7 @@
 package com.example.sqlitemigration.data.model;
 
+import androidx.annotation.NonNull;
+
 import javax.annotation.processing.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -96,4 +98,10 @@ public class User {
         this.company = company;
     }
 
+
+    @NonNull
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
